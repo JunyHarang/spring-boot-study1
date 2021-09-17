@@ -4,14 +4,16 @@ import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Component;
 
 // @RequiredArgsConstructor는 final이 붙은 필드를 대상으로 생성자를 만들어준다.
-@Component @RequiredArgsConstructor
+@Component //@RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService{
     // 이 코드도 구현체와 인터페이스를 의존하므로 DIP, OCP 위반
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
-    private final MemberRepository memberRepository;
+    private MemberRepository memberRepository;
     // 고정 할인에서 정률 할인 정책으로 바뀌게 되어 아래와 같이 수정 해 준다.
     // 아래 두 코드는 DIP와 OCP위반이다. 인터페이스와 구현체를 함께 의존하기 때문.
 //    private final DiscountPolicy discountPolicy = new FixDiscountPolicy();
@@ -21,11 +23,10 @@ public class OrderServiceImpl implements OrderService{
     private final DiscountPolicy discountPolicy;
 
     // 생성자를 통해 DI가 가능하게 하면 NPE를 막을 수 있다.
-    // 롬복 사용으로 아래 생성자 주석
-//      @Autowired public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-//          this.memberRepository = memberRepository;
-//          this.discountPolicy = discountPolicy;
-//      }
+      @Autowired public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+          this.memberRepository = memberRepository;
+          this.discountPolicy = discountPolicy;
+      }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
