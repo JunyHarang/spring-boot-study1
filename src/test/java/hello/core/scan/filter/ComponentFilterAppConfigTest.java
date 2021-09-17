@@ -18,12 +18,12 @@ public class ComponentFilterAppConfigTest {
         Assertions.assertThat(beanA).isNotNull();
 
         org.junit.jupiter.api.Assertions.assertThrows(NoSuchBeanDefinitionException.class, () -> ac.getBean("beanB", BeanB.class));
-    }
+    } // filterScan() 끝
 
     @Configuration @ComponentScan(includeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = MyIncludeComponent.class),
                                   excludeFilters = @ComponentScan.Filter(type = FilterType.ANNOTATION, classes = MyExcludeComponent.class)
     )
     static class ComponentFilterAppConfig {
 
-    }
-}
+    } // ComponentFilterAppConfig 끝
+} // Class 끝

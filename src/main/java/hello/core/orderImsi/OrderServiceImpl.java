@@ -6,8 +6,6 @@ import hello.core.member.MemberRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import java.security.PublicKey;
-
 @Component public class OrderServiceImpl implements OrderService{
     // 이 코드도 구현체와 인터페이스를 의존하므로 DIP, OCP 위반
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
@@ -21,10 +19,10 @@ import java.security.PublicKey;
     private final DiscountPolicy discountPolicy;
 
     // 생성자를 통해 DI가 가능하게 하면 NPE를 막을 수 있다.
-    @Autowired public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-        this.memberRepository = memberRepository;
-        this.discountPolicy = discountPolicy;
-    }
+      @Autowired public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+          this.memberRepository = memberRepository;
+          this.discountPolicy = discountPolicy;
+      }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {

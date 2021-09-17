@@ -16,4 +16,4 @@ public class AutoAppConfigTest {
         Assertions.assertThat(memberService).isInstanceOf(MemberService.class);
 
     } // basicScan() 끝
-}
+} // Class 끝
