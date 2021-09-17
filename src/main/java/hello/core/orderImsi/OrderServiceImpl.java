@@ -3,10 +3,12 @@ package hello.core.orderImsi;
 import hello.core.discount.DiscountPolicy;
 import hello.core.member.Member;
 import hello.core.member.MemberRepository;
-import org.springframework.beans.factory.annotation.Autowired;
+import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
-@Component public class OrderServiceImpl implements OrderService{
+// @RequiredArgsConstructor는 final이 붙은 필드를 대상으로 생성자를 만들어준다.
+@Component @RequiredArgsConstructor
+public class OrderServiceImpl implements OrderService{
     // 이 코드도 구현체와 인터페이스를 의존하므로 DIP, OCP 위반
 //    private final MemberRepository memberRepository = new MemoryMemberRepository();
     private final MemberRepository memberRepository;
@@ -19,10 +21,11 @@ import org.springframework.stereotype.Component;
     private final DiscountPolicy discountPolicy;
 
     // 생성자를 통해 DI가 가능하게 하면 NPE를 막을 수 있다.
-      @Autowired public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
-          this.memberRepository = memberRepository;
-          this.discountPolicy = discountPolicy;
-      }
+    // 롬복 사용으로 아래 생성자 주석
+//      @Autowired public OrderServiceImpl(MemberRepository memberRepository, DiscountPolicy discountPolicy) {
+//          this.memberRepository = memberRepository;
+//          this.discountPolicy = discountPolicy;
+//      }
 
     @Override
     public Order createOrder(Long memberId, String itemName, int itemPrice) {
