@@ -28,15 +28,15 @@ public class PrototypeTest {
         // 싱글톤 Bean Scope와 다르게 Prototype은 직접 destory()를 호출한 곳에서 호출해주어야 한다.
         prototypeBean.destroy();
         prototypeBean1.destroy();
-    }
+    } // prototypeBeanFind() 끝
 
     @Scope("prototype") static class PrototypeBean {
         @PostConstruct public void init() {
             System.out.println("SingletonBean.init 이 호출 되었습네다!");
-        }
+        } // init() 끝
 
         @PreDestroy public void destroy() {
             System.out.println("SingletonBean.destroy 이 호출 되었습네다!");
-        }
-    }
-}
+        } // destroy() 끝
+    } // PrototypeBean Class 끝
+} // Class 끝
